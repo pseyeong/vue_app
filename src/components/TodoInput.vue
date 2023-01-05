@@ -4,6 +4,14 @@
         <span v-on:click="addTodo" class="addContainer">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
+
+        <modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">경고</h3>
+            <span slot="footer" @click="showModal = false">
+                할 일을 입력하세요!
+                <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+            </span>
+        </modal>
     </div>
 </template>
 
@@ -18,7 +26,8 @@
             addTodo(){
                 if(this.newTodoItem !== ""){ // (!== 다르다) // 인풋 박스의 입력 값이 있을 때만 저장
                     var value = this.newTodoItem && this.newTodoItem.trim(); // 인풋 박스에 입력된 텍스트의 앞뒤 공백 문자열 제거
-                    localStorage.setItem(value, value);
+                    //localStorage.setItem(value, value);
+                    this.$emit('addTodo',value);
                     this.clearInput(); // 인풋 박스 입력 값 초기화
                 }
             },
