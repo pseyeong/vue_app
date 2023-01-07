@@ -1,10 +1,4 @@
-<script>
-export default {
-  props: {
-    show: Boolean
-  }
-}
-</script>
+
 
 <template>
   <Transition name="modal">
@@ -33,6 +27,14 @@ export default {
     </div>
   </Transition>
 </template>
+
+<script>
+export default {
+  props: {
+    show: Boolean
+  }
+}
+</script>
 
 <style scoped>
 .modal-mask {

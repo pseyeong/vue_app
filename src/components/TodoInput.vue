@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" v-on:keyup.enter="addTodo"> <!-- v-model : 폼에 입력한 값을 뷰 인스턴스의 데이터와 즉시 동기화 -->
-        <span v-on:click="addTodo" class="addContainer">
+        <span class="addContainer" v-on:click="addTodo">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
 
@@ -16,10 +16,14 @@
 </template>
 
 <script>
+    import Modal from './common/Modal.vue'
+
     export default{
+        props:['propsdata'],
         data(){
             return{
-                newTodoItem:''
+                newTodoItem:'',
+                showModal:false // 모달 동작을 위한 플래그 값
             }
         },
         methods:{
@@ -29,11 +33,16 @@
                     //localStorage.setItem(value, value);
                     this.$emit('addTodo',value);
                     this.clearInput(); // 인풋 박스 입력 값 초기화
+                }else{
+                    this.showModal = !this.showModal; // 텍스트 미입력 시 모달 동작
                 }
             },
             clearInput(){
                 this.newTodoItem = '';
             }
+        },
+        components:{
+            Modal: Modal
         }
     }
 </script>
